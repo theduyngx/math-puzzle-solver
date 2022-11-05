@@ -42,9 +42,16 @@
  the header row, and the head of the other sublists being the components of header column).
  
  And simply run it through the `puzzle_solution` predicate:
- ```diff
- ?-  Puzzle=[[0,14,10,35],[14,_,_,_],[15,_,_,_],[28,_,1,_]],
- |   puzzle_solution(Puzzle).
- Puzzle = [[0, 14, 10, 35], [14, 7, 2, 1], [15, 3, 7, 5], [28, 4, 1, 7]] ;
+ ```
+ 1 ?- Puzzle = [[0,14,16,18],[189,_,_,_],[17,_,_,_],[60,_,_,_]], puzzle_solution(Puzzle).
+      | 14 | 16 | 18 |
+ -----+----+----+----+
+  189 |  3 |  9 |  7 |
+ -----+----+----+----+
+   17 |  6 |  3 |  8 |
+ -----+----+----+----+
+   60 |  5 |  4 |  3 |
+ -----+----+----+----+
+ Puzzle = [[0, 14, 16, 18], [189, 3, 9, 7], [17, 6, 3, 8], [60, 5, 4, 3]] ;
  false.
  ```
