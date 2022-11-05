@@ -38,10 +38,16 @@
  the for the first and second columns, `14` and `10` are their respective sums instead).
  
  ### Usage
- To run the program, input the Puzzle with the same format as specified above (a list of sublists, with first sublist being
- the header row, and the head of the other sublists being the components of header column).
+ To run the program, go into the correct directory in terminal, and enter command `swipl`, and then run the file solve:
+ ```
+ ?- [solve].
+ true.
+ ```
+ After successfully loading up `solve.pl`, simply input the Puzzle with the same format as specified above (a list of
+ sublists, with first sublist being the header row, and the head of the other sublists being the components of header
+ column).
  
- And simply run it through the `puzzle_solution` predicate:
+ And run it through the `puzzle_solution` predicate:
  ```
  1 ?-  Puzzle = [[0,14,16,18],[189,_,_,_],[17,_,_,_],[60,_,_,_]],
    |   puzzle_solution(Puzzle).
