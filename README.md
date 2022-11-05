@@ -1,7 +1,13 @@
 # Prolog math puzzle solver
- Prolog program solving a specific n x n math puzzle.
- The puzzle consists of a header row, a header column, and the body (the body is n x n). The headers represent either the sum or product of
- that row / column. The diagonal of the puzzle's body must hold the same value as well. Here's an example of a puzzle:
+### About
+ Prolog program solving a specific n x n math puzzle, in which the puzzle consists of a header row, a header column,
+ and the body (the body is n x n). The headers represent either the sum or product of that column / row. Every cell
+ in each column / row must be distinct from one another. The diagonal of the puzzle's body must hold the same value 
+ as well.
+ 
+ If either of these specifications are not met, the program will simply return `false` (the puzzle isn't 
+ square, the diagonal values are specified to not match, there is no viable solution, etc.).
+ Here's an example of a puzzle:
  
  ```
  Puzzle = [[0,14,10,35],[14,_,_,_],[15,_,_,_],[28,_,1,_]]
@@ -15,7 +21,7 @@
  ----+----+----+----+
   15 |    |    |    |
  ----+----+----+----+
-  28 |    | 1  |    |
+  28 |    |  1 |    |
  ----+----+----+----+
  ```
  where `14, 10, 35` is the header row, and `14, 15, 28` is the header column. The solution to this puzzle would be:
@@ -34,10 +40,11 @@
   28 |  4 |  1 |  7 |
  ----+----+----+----+
  ```
- (we can see that, say, for the third row, `28` is the sum - in fact for all rows in this puzzle actually - while
- the for the first and second columns, `14` and `10` are their respective sums instead).
+ We can see that, say, for the third row, `28` is the sum - in fact for all rows in this puzzle actually - while
+ the for the first and second columns, `14` and `10` are their respective sums instead. Also, the diagonal cells all hold
+ the same value 7.
  
- ### Usage
+### Usage
  To run the program, go into the correct directory in terminal, and enter command `swipl`, and then run the file solve:
  ```
  ?- [solve].
