@@ -5,7 +5,6 @@
 Each square (or cell) is to be filled with single digit 1-9; each row/column
 contains no duplicates; squares on diagonal must have same value; and the
 header row/column (given) holds either the sum or product of that row/column.
-
 The program first makes sure the diagonal holds same value. Then, values in
 each cell row/column are distinct. Finally, it solves multiple equations,
 given the headers.
@@ -25,14 +24,11 @@ product_list([Head|Tail], Prod) :-
     Prod = Head * Rest,
     product_list(Tail, Rest).
 
-%!  remove_hrow(?Puzzle:list, -Head_Row_Removed:list)
+%!  tail(?List:list, -Tail:list)
 %
-%   The output - Head_Row_Removed - is the Puzzle with header row removed.
-remove_hrow([], []).
-remove_hrow([[_]|TA], TB) :-
-    remove_hrow(TA, TB).
-remove_hrow([[_,H2|T]|TA], [[H2|T]|TB]) :-
-    remove_hrow(TA, TB).
+%   The output - Tail - is the list with its head removed.
+tail([], []).
+tail([_|TA], TA).
 
 %!  diagonal(?RList:list, +Index:int, -Value:int)
 %!  diagonal_unity(?Puzzle:list)
@@ -44,24 +40,25 @@ remove_hrow([[_,H2|T]|TA], [[H2|T]|TB]) :-
 %   then calls diagonal/3. Succeeds if Puzzle's diagonal holds the same value.
 diagonal([],_,_).
 diagonal([Head|Tail], Index, Val) :-
-    nth0(Index, Head, Val), IndexN is Index+1,
+    nth0(Index, Head, Val),
+    IndexN is Index+1,
     diagonal(Tail, IndexN, Val).
 diagonal_unity([_|Rest]) :-
-    remove_hrow(Rest, Cells),
+    maplist(tail, Rest, Cells),
     diagonal(Cells, 0, _).
 
 %!  puzzle_numerical(?Puzzle:list)
 %
-%   Checking other Puzzle's validity criteria:
+%   Checking other Puzzle's numerical validity criteria:
 %   firstly makes sure all cell's values must be from 1 to 9;
 %   then each row/column has distinct values;
 %   and finally extracts headers to then solve multiple equations.
-puzzle_numerical([R1_Org|Rows]) :-
-    remove_hrow(Rows, Row_Cells), append(Row_Cells, Vs), Vs ins 1..9,
+puzzle_numerical(Puzzle) :-
+    [[_|Row_Head] | Rows] = Puzzle,
+    maplist(tail, Rows, Row_Cells), append(Row_Cells, Vs), Vs ins 1..9,
     maplist(all_distinct, Row_Cells), transpose(Row_Cells, Col_Cells),
     maplist(all_distinct, Col_Cells),
-    remove_hrow([R1_Org], [Row_Head]), transpose([R1_Org|Rows], [C1_Org|_]),
-    remove_hrow([C1_Org], [Col_Head]),
+    transpose(Puzzle, [[_|Col_Head] | _]),
     solve_equations(Row_Head, Col_Head, Row_Cells, Col_Cells).
 
 %!  solve_equations(+Row_Head:list,  +Col_Head:list,
