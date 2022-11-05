@@ -11,6 +11,7 @@ given the headers.
 */
 
 :- use_module(library(clpfd)).
+:- use_module(print).
 
 %!  product_list(?List:list, -Prod:compound)
 %
@@ -80,4 +81,5 @@ solve_equations([Row_H|RHs], [Col_H|CHs], [Row_Cells|RCs], [Col_Cells|CCs]) :-
 puzzle_solution(Puzzle) :-
     diagonal_unity(Puzzle),
     puzzle_numerical(Puzzle),
-    append(Puzzle, Vs), label(Vs).
+    append(Puzzle, Vs), label(Vs),
+    print(Puzzle).
