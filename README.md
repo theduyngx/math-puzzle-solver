@@ -43,7 +43,8 @@
  
  And simply run it through the `puzzle_solution` predicate:
  ```
- 1 ?- Puzzle = [[0,14,16,18],[189,_,_,_],[17,_,_,_],[60,_,_,_]], puzzle_solution(Puzzle).
+ 1 ?-  Puzzle = [[0,14,16,18],[189,_,_,_],[17,_,_,_],[60,_,_,_]],
+   |   puzzle_solution(Puzzle).
       | 14 | 16 | 18 |
  -----+----+----+----+
   189 |  3 |  9 |  7 |
